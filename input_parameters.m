@@ -9,70 +9,38 @@ warning("off");
 graphics_toolkit("gnuplot");
 
 %-----------------------------
-CRUISE = "AMT24";
+CRUISE = "AMT23";
 
 % Variables to be changed during cruise according to specific setups and user needs
 %
-% Date
-% Set date interval to be processed (format is "yyyymmdd")
-% (this will have to be changed each time the scripts are run)
-% first day of cruise = 20180925, jday=268: "With_AC9/"  
-% day of switch to default config = 20180927, jday=270: "/" 
-% day of ACS switch = 20181019, jday=292": "With_AC9_Without_ACS/"% end day 301
-# last day is 20181028
-% dates
+
  
  
-# default config # ACS 122 system
-#inidate = "20141001"; #  jday 274 - use as test day
-#enddate = "20141001"; 
-inidate = "20141009"; #  jday 268 - start hr 14
-enddate = "20141009"; #  date when ACS breaks
-WAP_ROOT = strcat(lower(CRUISE),'_14') 
-dh8_instruments = {"bb3", "acs"};
-dh8_ports = {2,4}; 
-dh8_serialnumber = {1173,122}; 
-WAPhour = "14";
-ACS_CAL_FILE_NAME = "acs122_20140904.dev";
+# default config # ACS 122 system1"; 
+#inidate = "20131008"; #  jday 281 - start day of cruise
+#enddate = "20131023"; #  date when ACS breaks - jday 296 - 009 hr
+#WAP_ROOT = strcat(lower(CRUISE),'_13') 
+#dh8_instruments = {"acs", "bb3"};
+#dh8_ports = {1,4}; 
+#dh8_serialnumber = {1173,122}; 
+#WAPhour = "4"; # use for for 23/10 - 
+#ACS_CAL_FILE_NAME = "acs122.dev";
 #ACS_CAL_FILE_NAME = "acs167.dev";
 %-----------------------------
 
-# ACS 167 system
-#inidate = "20141001"; #  jday 274 - use as test day
-#enddate = "20141001";
-#inidate = "20141020" 
-#enddate = "20141028"; #  jday 302 - end hr 7
-#WAP_ROOT = strcat(lower(CRUISE),'_14') 
-#dh8_instruments = {"bb3", "acs2"};
-#dh8_ports = {2,4}; 
-#dh8_serialnumber = {1173,167}; 
-#WAPhour = "14";
-#ACS_CAL_FILE_NAME = "acs122_20140904.dev";
-#ACS_CAL_FILE_NAME = "acs167.dev";
 
-#  ACS 167 system with AC9
-# inidate = "20141001"; #  jday 274 - use as test day
-# enddate = "20141001"; 
-#inidate = "20141030"; #  
-#enddate = "20141031"; #  
-#WAP_ROOT = strcat('amt24_withAC9','_14') 
-#dh8_instruments = {"bb3", "acs2"};
-#dh8_ports = {2,4}; 
-#dh8_serialnumber = {1173,167}; 
-#WAPhour = "10";
-#ACS_CAL_FILE_NAME = "acs122_20140904.dev";
+ 
+# default config # ACS 122 system1"; 
+inidate = "20131025"; #  jday 298 - systems are switched on again
+enddate = "20131105"; # 
+WAP_ROOT = strcat(lower(CRUISE),'c_13') 
+dh8_instruments = {"ac9", "acs", "bb3"};
+dh8_ports = {1,2,3}; 
+dh8_serialnumber = {277,122,1173}; 
+WAPhour = "11"; # use for final day
+ACS_CAL_FILE_NAME = "acs122.dev";
 #ACS_CAL_FILE_NAME = "acs167.dev";
-
-# default config # use for step2
-#inidate = "20141029"; #  jday 268 - start hr 14
-#enddate = "20141030"; #  date when ACS breaks
-#WAP_ROOT = strcat(lower(CRUISE),'_14') 
-#dh8_instruments = {"bb3", "acs"};
-#dh8_ports = {2,4}; 
-#dh8_serialnumber = {1173,122}; 
-#WAPhour = "14";
-#ACS_CAL_FILE_NAME = "acs122_20140904.dev";
-#ACS_CAL_FILE_NAME = "acs167.dev";
+%-----------------------------
 
 
 % Underway subdirectory where to find special wapped data
@@ -113,13 +81,14 @@ UWAY_WAP_SUBDIR = "/";
 
 %-----------------------------
 % Paths
-MAIN_PATH = "/users/rsg/tjor/scratch_network/AMT_underway/AMT24/";
+MAIN_PATH = '~/scratch_network/AMT_underway/AMT23/'
 
 # MAIN_PATH = "/data/abitibi1/scratch/scratch_disk/tjor/AMT_underway/AMT26/"; disp("\n\n-----------THIS IS FOR     TOM----------\n\n"); fflush(stdout);
 % MAIN_PATH = "/tom/AMT_underway/AMT28/"; %disp("\n\n---------THIS IS FOR GIORGIO---------\n\n"); fflush(stdout);
 # MAIN_PATH = "/fast_scratch/AMT28/"; disp("\n\n---------THIS IS FOR GIORGIO---------\n\n"); fflush(stdout);
 % MAIN_PATH = [MAIN_PATH, "/Data/", CRUISE,"/"];     % Root directory for current AMT cruise
-PATH_DATA = [MAIN_PATH, "Data/"];        % Directory with all raw and wapped data
+PATH_DATA = [MAIN_PATH, "Data/"];    
+  % Directory with all raw and wapped data
 # PATH_DATA  = "/data/datasets/cruise_data/active/AMT28/Optics_all/Optics/Data/";
 
 PATH_SOURCE = [MAIN_PATH, "Source/"];% Directory with all source code
@@ -131,19 +100,20 @@ addpath([PATH_SOURCE]);
 % Each directory will contain a series of subdirectories for each instrument
 % (e.g. Underway, Optics_rig, BB3_ctd etc. etc.)
 OPTIC_DIR = "Optics_rig/";
-UWAY_DIR = "Uway/";
+UWAY_DIR = "underway/";
 BB3_DIR = "BB3_ctd/";
 CTD_DIR = "Ship_CTD/";
 % Specific data subdirectories
-DATA_WAPPED = "WAP_Extracted/";
+DATA_WAPPED = "WAP_extracted/";
 DATA_RAW = "Raw/";
-DATA_FLOW = "Flow/";
+DATA_FLOW = "Flow_meter/";
 DATA_WITH_BB3 = "with_BB3/";
+
 
 
 %-----------------------------
 % calibration file dir
-D_CAL_FILES = [PATH_DATA, UWAY_DIR, "devs/"];
+D_CAL_FILES = [PATH_DATA, UWAY_DIR, "dev/"];
 
 %-----------------------------
 % ACS calibration file
@@ -162,15 +132,15 @@ D_CAL_FILES = [PATH_DATA, UWAY_DIR, "devs/"];
 # here we assume that the ship"s uway data are always stored in daily folders called YYYYDOY (e.g., 2018290) 
 #addpath(UWAY_DIR) # location where rd seatech and ocean logger functions are stored
 addpath([MAIN_PATH, "Source/Underway/"]) # location where rd seatech and ocean logger functions are stored
-DIR_GPS = '/data/datasets/cruise_data/active/AMT24/Ship_data/Compress/Compress/days/seatex-gga/' # hard-coded for amt 24
-GLOB_GPS = "seatex*";
-FN_GPS = "seatex-gga.ACO";
-FNC_GPS = @rd_seatech_gga; # this function should be inside Source/Underway
+#DIR_GPS = '/data/datasets/cruise_data/active/AMT24/Ship_data/Compress/Compress/days/seatex-gga/' # hard-coded for amt 24
+#GLOB_GPS = "seatex*";
+#FN_GPS = "seatex-gga.ACO";
+#FNC_GPS = @rd_seatech_gga; # this function should be inside Source/Underway
 
-DIR_METDATA = '/data/datasets/cruise_data/active/AMT24/Ship_data/Compress/Compress/days/oceanlogger/' # hard-coded for amt 24
-GLOB_METDATA = "oceanlogger*";
-FN_METDATA = "oceanlogger.ACO";
-FNC_METDATA = @rd_oceanloggerJCR; # this function should be inside Source/Underway
+#DIR_METDATA = '/data/datasets/cruise_data/active/AMT24/Ship_data/Compress/Compress/days/oceanlogger/' # hard-coded for amt 24
+#GLOB_METDATA = "oceanlogger*";
+#FN_METDATA = "oceanlogger.ACO";
+#FNC_METDATA = @rd_oceanloggerJCR; # this function should be inside Source/Underway
 
 #----------------------------
 
