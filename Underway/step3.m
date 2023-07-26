@@ -142,7 +142,7 @@ fn = dir([din "*mat"]);
 
 
 
-for ifn = 1:size(fn,1)
+for ifn = 1:size(fn,1) -1 # -1 removes day with no u_uway data
  
     disp(["\n" fn(ifn).name])
     load([din fn(ifn).name]);
@@ -376,19 +376,16 @@ save('-v6', [DIR_STEP3 lower(CRUISE) '_optics.mat'], lower(CRUISE))
 
 
 figure 
-plot(amt_optics.uway.time-t0+1, log10(abs(amt_optics.acs2.chl)))
-hold on
-plot(amt_optics.uway.time-t0+1, log10(abs(amt_optics.acs.chl)),'r')
-xlim([280,284])
+plot(amt_optics.acs.time-t0+1, log10(abs(amt_optics.acs.chl)),'r')
 
-figure 
-plot(amt_optics.uway.lat, log10(abs(amt_optics.acs2.chl)))
-hold on
+# hold on
+figure
 plot(amt_optics.uway.lat, log10(abs(amt_optics.acs.chl)),'r')
-ylim([-2,0])
+ylim([-3,0])
 
-#figure
-#plot(amt_optics.uway.time, amt_optics.uway.lat) 
+figure
+plot(amt_optics.acs.time - amt_optics.uway.time)
+#xlim([19000,21000])
 
 
 #figure

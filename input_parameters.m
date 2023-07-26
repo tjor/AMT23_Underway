@@ -17,7 +17,7 @@ CRUISE = "AMT23";
  
  
 # default config # ACS 122 system1"; 
-inidate = "20131008"; #  jday 281 - start day of cruise
+inidate = "20131008"; #  jday 281 - start day of cruise 
 enddate = "20131023"; #  date when ACS breaks - jday 296 - 009 hr
 WAP_ROOT = strcat(lower(CRUISE),'_13') 
 dh8_instruments = {"acs", "bb3"};
@@ -25,7 +25,7 @@ dh8_ports = {1,4};
 dh8_serialnumber = {1173,122}; 
 WAPhour = "4"; # use for for 23/10 - 
 ACS_CAL_FILE_NAME = "acs122.dev";
-ACS_CAL_FILE_NAME = "acs167.dev";
+#ACS_CAL_FILE_NAME = "acs167.dev";
 %-----------------------------
 
 
