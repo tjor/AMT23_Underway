@@ -29,7 +29,6 @@
 
    dailyfiles = dir(  [DIR_STEP1 "*mat"]  ); % redundancy with line 27? just different format
 
-
    %first_day = 1;   
    for iday = first_day:last_day
        

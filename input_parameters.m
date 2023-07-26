@@ -17,28 +17,28 @@ CRUISE = "AMT23";
  
  
 # default config # ACS 122 system1"; 
-#inidate = "20131008"; #  jday 281 - start day of cruise
-#enddate = "20131023"; #  date when ACS breaks - jday 296 - 009 hr
-#WAP_ROOT = strcat(lower(CRUISE),'_13') 
-#dh8_instruments = {"acs", "bb3"};
-#dh8_ports = {1,4}; 
-#dh8_serialnumber = {1173,122}; 
-#WAPhour = "4"; # use for for 23/10 - 
-#ACS_CAL_FILE_NAME = "acs122.dev";
-#ACS_CAL_FILE_NAME = "acs167.dev";
+inidate = "20131008"; #  jday 281 - start day of cruise
+enddate = "20131023"; #  date when ACS breaks - jday 296 - 009 hr
+WAP_ROOT = strcat(lower(CRUISE),'_13') 
+dh8_instruments = {"acs", "bb3"};
+dh8_ports = {1,4}; 
+dh8_serialnumber = {1173,122}; 
+WAPhour = "4"; # use for for 23/10 - 
+ACS_CAL_FILE_NAME = "acs122.dev";
+ACS_CAL_FILE_NAME = "acs167.dev";
 %-----------------------------
 
 
  
 # default config # ACS 122 system1"; 
-inidate = "20131025"; #  jday 298 - systems are switched on again
-enddate = "20131105"; # 
-WAP_ROOT = strcat(lower(CRUISE),'c_13') 
-dh8_instruments = {"ac9", "acs", "bb3"};
-dh8_ports = {1,2,3}; 
-dh8_serialnumber = {277,122,1173}; 
-WAPhour = "11"; # use for final day
-ACS_CAL_FILE_NAME = "acs122.dev";
+#inidate = "20131025"; #  jday 298 - systems are switched on again
+#enddate = "20131105"; # 
+#WAP_ROOT = strcat(lower(CRUISE),'c_13') 
+#dh8_instruments = {"ac9", "acs", "bb3"};
+#dh8_ports = {1,2,3}; 
+#dh8_serialnumber = {277,122,1173}; 
+#WAPhour = "4"; # use 4 for final day
+#ACS_CAL_FILE_NAME = "acs122.dev";
 #ACS_CAL_FILE_NAME = "acs167.dev";
 %-----------------------------
 
@@ -100,7 +100,7 @@ addpath([PATH_SOURCE]);
 % Each directory will contain a series of subdirectories for each instrument
 % (e.g. Underway, Optics_rig, BB3_ctd etc. etc.)
 OPTIC_DIR = "Optics_rig/";
-UWAY_DIR = "underway/";
+UWAY_DIR = 'underway/';
 BB3_DIR = "BB3_ctd/";
 CTD_DIR = "Ship_CTD/";
 % Specific data subdirectories
@@ -122,7 +122,7 @@ D_CAL_FILES = [PATH_DATA, UWAY_DIR, "dev/"];
 
 %-----------------------------
 % Ship"s system directories
-#PATH_SHIP = ['/data/datasets/cruise_data/active/AMT24/Ship_data/Compress']; %tjor - ships meteorological data
+PATH_SHIP = [PATH_DATA, UWAY_DIR, 'Ships_underway_data/']
 # PATH_TS = [PATH_SHIP, "Compress/"]; % Directory with ship underway ctd
 #PATH_TS = PATH_SHIP; # no compress directory for amt 26
 
@@ -132,15 +132,15 @@ D_CAL_FILES = [PATH_DATA, UWAY_DIR, "dev/"];
 # here we assume that the ship"s uway data are always stored in daily folders called YYYYDOY (e.g., 2018290) 
 #addpath(UWAY_DIR) # location where rd seatech and ocean logger functions are stored
 addpath([MAIN_PATH, "Source/Underway/"]) # location where rd seatech and ocean logger functions are stored
-#DIR_GPS = '/data/datasets/cruise_data/active/AMT24/Ship_data/Compress/Compress/days/seatex-gga/' # hard-coded for amt 24
-#GLOB_GPS = "seatex*";
-#FN_GPS = "seatex-gga.ACO";
-#FNC_GPS = @rd_seatech_gga; # this function should be inside Source/Underway
+DIR_GPS =  [PATH_SHIP, '/underway_daily/']; # 
+GLOB_GPS = "2013\*";
+FN_GPS = "seatex-gga.csv";
+FNC_GPS = @rd_seatex_gga_AMT23; # this function should be inside Source/Underway - there is a modified version for AMT23
 
-#DIR_METDATA = '/data/datasets/cruise_data/active/AMT24/Ship_data/Compress/Compress/days/oceanlogger/' # hard-coded for amt 24
-#GLOB_METDATA = "oceanlogger*";
-#FN_METDATA = "oceanlogger.ACO";
-#FNC_METDATA = @rd_oceanloggerJCR; # this function should be inside Source/Underway
+DIR_METDATA = [PATH_SHIP, "/underway_daily/"]; # 
+GLOB_METDATA = "2013\*";
+FN_METDATA = "oceanlogger.csv";
+FNC_METDATA = @rd_oceanloggerJCR_AMT23; # this function should be inside Source/Underway - there is a modified version for AMT23
 
 #----------------------------
 
