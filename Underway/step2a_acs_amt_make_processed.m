@@ -84,13 +84,21 @@ function acsout = step2a_acs_amt_make_processed(acs, dailyfile, idays, acs_lim, 
    tmp_time = datevec(time);
    tmp_sched = time;
    tmp_time_min = round(tmp_time(:,5)+tmp_time(:,6)/60);
+   
+   # MANUAL dt shift: ONLY FOR AMT23
+   if idays >= 4 # manual delta t shift for AMT23
+            delta_time = 10;
+   else
+            delta_time = 0;
+   endif
 
-   i_fl = (ismember(tmp_time_min, [2:9]) & tmp_sched) ;  % assign index to filtered times                                      %<<<====== CHANGE HERE
-   i_uf = (ismember(tmp_time_min, [11:58]) & tmp_sched);  % assign index to unfiltered times                                   %<<<====== CHANGE HERE
+   i_fl = (ismember(tmp_time_min, [2:9] + delta_time) & tmp_sched) ;  % assign index to filtered - times                                      %<<<====== CHANGE HERE
+   i_uf = (ismember(tmp_time_min, [11:58] + delta_time) & tmp_sched);  % assign index to unfiltered times                                   %<<<====== CHANGE HERE
 
-   i_fl_med = (ismember(tmp_time_min, [5]) & tmp_sched) ;  % assign index to filtered times to be used for correction            %<<<====== CHANGE HERE
+   i_fl_med = (ismember(tmp_time_min, [5] +delta_time) & tmp_sched) ;  % assign index to filtered times to be used for correction            %<<<====== CHANGE HERE
 
    
+
    
 
    %take median value of the xTF filtered times without using any loop   
